@@ -1,3 +1,5 @@
+using Attk_Final.Repository;
+
 namespace Attk_Final
 {
     public class Program
@@ -8,6 +10,10 @@ namespace Attk_Final
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+
+            //Register service and repository
+            builder.Services.AddScoped<IPharmacistRepository, PharmacistRepository>();
 
             var app = builder.Build();
 
@@ -28,7 +34,7 @@ namespace Attk_Final
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Pharma}/{action=Index}/{id?}");
 
             app.Run();
         }
