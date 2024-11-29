@@ -1,0 +1,49 @@
+﻿@* @model Attk_Final.Models.consultation
+
+@{
+    ViewData["Title"] = "Add Doctor";
+}
+
+<div class="container">
+    <h2>Add Doctor</h2>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+    }
+
+    <form asp-action="AddDoctor" method="post">
+        <div class="form-group">
+            <label for="StaffId">Staff ID</label>
+            <input asp-for="StaffId" class="form-control" />
+            <span asp-validation-for="StaffId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="ConsultationFee">Consultation Fee</label>
+            <input asp-for="ConsultationFee" class="form-control" />
+            <span asp-validation-for="ConsultationFee" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="SpecializationName">Specialization Name</label>
+            <select asp-for="SpecializationName" class="form-control">
+                <option value="">Select Specialization</option>
+                @if (ViewBag.Specializations != null)
+                {
+                    foreach (var specialization in ViewBag.Specializations)
+                    {
+                        <option value="@specialization.SpecializationId">
+                            @specialization.SpecializationName
+                        </option>
+                    }
+                }
+            </select>
+
+            <span asp-validation-for="SpecializationName" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Doctor</button>
+    </form>
+</div>
+ *@
