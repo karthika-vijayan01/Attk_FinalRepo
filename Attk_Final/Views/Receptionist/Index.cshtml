@@ -1,0 +1,103 @@
+﻿@model IEnumerable<ATTK_Project.Models.Patient>
+
+@{
+    ViewData["Title"] = "Patient Records";
+}
+
+<h1>Patient Records</h1>
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <a asp-action="Add" class="btn btn-outline-info btn-sm">Add New Patient</a>
+
+    <form asp-action="Index" method="get" class="d-flex" style="max-width: 400px;">
+        <input type="text" name="query" class="form-control form-control-sm me-2"
+               placeholder="Search by Name, Phone, or ID" value="@ViewData["Query"]" />
+        <button type="submit" class="btn btn-outline-secondary btn-sm me-2">Search To Book Appointment</button>
+
+        @if (!string.IsNullOrWhiteSpace((string)ViewData["Query"]))
+        {
+            <a asp-action="Index" class="btn btn-outline-danger btn-sm">Clear Search</a>
+        }
+    </form>
+</div>
+
+@if (!string.IsNullOrWhiteSpace(ViewData["NoResultsMessage"] as string))
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewData["NoResultsMessage"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.PatientId)</th>
+            <th>@Html.DisplayNameFor(model => model.PatientName)</th>
+            <th>@Html.DisplayNameFor(model => model.DOB)</th>
+            <th>@Html.DisplayNameFor(model => model.Age)</th>
+            <th>@Html.DisplayNameFor(model => model.Gender)</th>
+            <th>@Html.DisplayNameFor(model => model.BloodGroup)</th>
+            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.DateOfRegistration)</th>
+            <th>@Html.DisplayNameFor(model => model.Status)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pat in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => pat.PatientId)</td>
+                <td>@Html.DisplayFor(modelItem => pat.PatientName)</td>
+                <td>@Html.DisplayFor(modelItem => pat.DOB)</td>
+                <td>@Html.DisplayFor(modelItem => pat.Age)</td>
+                <td>@Html.DisplayFor(modelItem => pat.Gender)</td>
+                <td>@Html.DisplayFor(modelItem => pat.BloodGroup)</td>
+                <td>@Html.DisplayFor(modelItem => pat.PhoneNumber)</td>
+                <td>@Html.DisplayFor(modelItem => pat.Address)</td>
+                <td>@Html.DisplayFor(modelItem => pat.Email)</td>
+                <td>@Html.DisplayFor(modelItem => pat.DateOfRegistration)</td>
+                <td>
+                    @if (pat.Status)
+                    {
+                        <button class="btn btn-outline-success btn-sm" disabled>Active</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-outline-danger btn-sm" disabled>Inactive</button>
+                    }
+                </td>
+
+                <td>
+                    <!-- Toggle status form -->
+                    <form asp-action="ToggleStatus" method="post" style="display:inline;">
+                        <input type="hidden" name="id" value="@pat.PatientId" />
+                        <input type="hidden" name="status" value="@(pat.Status ? "false" : "true")" />
+                        <button type="submit" class="btn btn-outline-warning btn-sm">
+                            @if (pat.Status)
+                            {
+                                <text>Deactivate</text>
+                            }
+                            else
+                            {
+                                <text>Activate</text>
+                            }
+                        </button>
+                    </form>
+                    <a asp-action="Edit" asp-route-id="@pat.PatientId" class="btn btn-outline-secondary btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@pat.PatientId" class="btn btn-outline-secondary btn-sm">View Details</a>
+
+                    <!-- Book Appointment button -->
+                    @if (ViewData["IsSearchResult"] != null && (bool)ViewData["IsSearchResult"])
+                    {
+                        <a asp-controller="BookAppointment" asp-action="Index" asp-route-patientId="@pat.PatientId"
+                           class="btn btn-outline-primary btn-sm">Book Appointment</a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

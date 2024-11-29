@@ -10,6 +10,13 @@ namespace Attk_Final
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+          
+            builder.Services.AddScoped<IReceptionistRepository, ReceptionistRepository>();
+            builder.Services.AddScoped<IBookAppointmentRepository, BookAppointmentRepository>();
+
+            builder.Services.AddScoped<IStaffRepository, StaffRepository>();
+            builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+           // builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
 
 
             //Register service and repository
