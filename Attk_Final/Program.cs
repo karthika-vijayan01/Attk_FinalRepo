@@ -1,3 +1,5 @@
+using Attk_Final.Repository;
+
 namespace Attk_Final
 {
     public class Program
@@ -8,7 +10,8 @@ namespace Attk_Final
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddScoped<IReceptionistRepository, ReceptionistRepository>();
+            builder.Services.AddScoped<IBookAppointmentRepository, BookAppointmentRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

@@ -1,0 +1,144 @@
+﻿ @model Attk_Final.Models.BookAppointmentViewModel
+
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<h1>Book Appointment</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="SaveAppointment" method="post">
+            <!-- Displaying the current patient's ID in a readonly field -->
+            <div class="form-group">
+                <label for="PatientId">Patient ID</label>
+                <input asp-for="PatientId" class="form-control" readonly />
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="DepartmentId">Select Department</label>
+                <select asp-for="DepartmentId" asp-items="@(new SelectList(Model.Departments, "DepartmentId", "DepartmentName"))" class="form-control" id="departmentSelect">
+                    <option value="">-- Select Department --</option>
+                </select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="DoctorId">Select Doctor</label>
+                <select asp-for="DoctorId" asp-items="@(new SelectList(Model.Doctors ?? new List<Doctor>(), "DoctorId", "Name"))" class="form-control" id="doctorSelect">
+                    <option value="">-- Select Doctor --</option>
+                </select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="AppointmentDate">Appointment Date</label>
+                <input asp-for="AppointmentDate" class="form-control" type="date" />
+                <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="TokenNumber">Token Number</label>
+                <input asp-for="TokenNumber" class="form-control" readonly />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Book Appointment</button> 
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#departmentSelect').change(function () {
+                var departmentId = $(this).val();
+                if (departmentId) {
+                    $.getJSON('/BookAppointment/GetDoctorsByDepartment', { departmentId: departmentId }, function (data) {
+                        var doctorSelect = $('#doctorSelect');
+                        doctorSelect.empty();
+                        doctorSelect.append('<option value="">-- Select Doctor --</option>');
+                        $.each(data, function (i, doctor) {
+                            doctorSelect.append('<option value="' + doctor.doctorId + '">' + doctor.name + '</option>');
+                        });
+                    });
+                } else {
+                    $('#doctorSelect').empty().append('<option value="">-- Select Doctor --</option>');
+                }
+            });
+        });
+    </script>
+}
+ 
+
+ @* @model Attk_Final.Models.BookAppointmentViewModel
+
+@{
+    ViewData["Title"] = "Book Appointment";
+}
+
+<h1>Book Appointment</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="SaveAppointment" method="post">
+            <!-- Displaying the current patient's ID in a readonly field -->
+            <div class="form-group">
+                <label for="PatientId">Patient ID</label>
+                <input asp-for="PatientId" class="form-control" readonly />
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="DepartmentId">Select Department</label>
+                <select asp-for="DepartmentId" class="form-control" id="departmentSelect">
+                    <option value="">-- Select Department --</option>
+                    <option value="1">Cardiology</option>
+                    <option value="2">Neurology</option>
+                    <option value="3">Orthopedics</option>
+                    <!-- Add other departments as needed -->
+                </select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="DoctorId">Select Doctor</label>
+                <select asp-for="DoctorId" class="form-control" id="doctorSelect">
+                    <option value="">-- Select Doctor --</option>
+                    <!-- Doctors for Department 1 -->
+                    <optgroup label="Cardiology">
+                        <option value="1">Dr. Anusha Ani</option>
+                        <option value="5">Dr. Anu Raj</option>
+                    </optgroup>
+                    <!-- Doctors for Department 2 -->
+                    <optgroup label="Neurology">
+                        <option value="2">Dr. Varsha Nicholas</option>
+                    </optgroup>
+                    <!-- Doctors for Department 3 -->
+                    <optgroup label="Orthopedics">
+                        <option value="3">Dr. Ahalya Grish</option>
+                        <option value="4">Dr. Karthika Vijayan</option>
+                    </optgroup>
+                </select>
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="AppointmentDate">Appointment Date</label>
+                <input asp-for="AppointmentDate" class="form-control" type="date" />
+                <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="TokenNumber">Token Number</label>
+                <input asp-for="TokenNumber" class="form-control" readonly />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Book Appointment</button>
+        </form>
+    </div>
+</div>
+ *@
