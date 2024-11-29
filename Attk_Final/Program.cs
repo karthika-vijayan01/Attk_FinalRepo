@@ -18,6 +18,10 @@ namespace Attk_Final
             builder.Services.AddScoped<ILoginRepository, LoginRepository>();
            // builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
 
+
+            //Register service and repository
+            builder.Services.AddScoped<IPharmacistRepository, PharmacistRepository>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -37,7 +41,7 @@ namespace Attk_Final
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Pharma}/{action=Index}/{id?}");
 
             app.Run();
         }

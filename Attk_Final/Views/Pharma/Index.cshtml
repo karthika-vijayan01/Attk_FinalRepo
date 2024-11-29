@@ -1,0 +1,33 @@
+﻿@model Attk_Final.Models.Pharmacist
+
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<!-- Welcome message -->
+<h1 class="text-center">Welcome to Pharmacist Dashboard</h1>
+
+<div class="text-center my-4">
+    <p class="lead">Manage your staff and perform administrative tasks efficiently.</p>
+</div>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <!-- Button for Staff Management -->
+        <div class="col-md-4 text-center">
+            <a asp-controller="Pharmacist" asp-action="MedicinePrescriptions" class="btn btn-primary btn-lg">
+                Pharmacist Management
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Back to List button (optional) -->
+<div class="text-center mt-4">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Back to List</a>
+</div>
