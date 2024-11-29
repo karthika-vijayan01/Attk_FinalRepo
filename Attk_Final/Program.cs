@@ -1,3 +1,5 @@
+using Attk_Final.Repository;
+
 namespace Attk_Final
 {
     public class Program
@@ -8,6 +10,10 @@ namespace Attk_Final
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<IStaffRepository, StaffRepository>();
+            builder.Services.AddScoped<ILoginRepository, LoginRepository>();
+           // builder.Services.AddScoped<IConsultationRepository, ConsultationRepository>();
+
 
             var app = builder.Build();
 
