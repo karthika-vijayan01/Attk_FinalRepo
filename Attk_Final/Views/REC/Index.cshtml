@@ -1,46 +1,33 @@
 ﻿@model ATTK_Project.Models.Patient
 
-
 @{
     ViewData["Title"] = "Index";
 }
 
-
-
-
 <!-- Welcome message -->
 <h1 class="text-center">Welcome to Receptionist Dashboard</h1>
 
-@* <div class="text-center my-4">
-    <p class="lead"></p>
-</div> *@
-
 <div class="container mt-4">
-    <div class="row justify-content-center">
-        <!-- Button for Staff Management -->
-        <div class="col-md-4 text-center">
+    <!-- Flexbox container for buttons -->
+    <div class="d-flex flex-column align-items-center">
+        <!-- Button for Receptionist Management -->
+        <div class="mb-3">
             <a asp-controller="Receptionist" asp-action="Index" class="btn btn-primary btn-lg">
                 Receptionist Management
             </a>
         </div>
-    </div>
-</div>
-@* <div class="container mt-4">
-    <div class="row justify-content-center">
-        <!-- Button for Staff Management -->
-        <div class="col-md-4 text-center">
-            <a asp-controller="Consultation" asp-action="AddDoctor" class="btn btn-primary btn-lg">
-              Add consultation Fees 
+
+        <!-- Button for Logout -->
+        <div>
+            <a asp-controller="Admin" asp-action="Index" class="btn btn-danger btn-lg">
+                Logout
             </a>
         </div>
     </div>
 </div>
- *@
-<!-- Back to List button (optional) -->
-@* <div class="text-center mt-4">
-    <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Back to List</a>
-</div> *@
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
