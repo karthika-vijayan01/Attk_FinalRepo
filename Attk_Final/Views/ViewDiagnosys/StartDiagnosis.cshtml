@@ -1,0 +1,71 @@
+﻿@model Attk_Final.Models.ViewDiagnosys
+
+@{
+    ViewData["Title"] = "StartDiagnosis";
+}
+
+<h1>StartDiagnosis</h1>
+
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="StartDiagnosis" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MainPrescriptionId" class="control-label"></label>
+                <input asp-for="MainPrescriptionId" class="form-control" />
+                <span asp-validation-for="MainPrescriptionId" class="text-danger"></span>
+            </div> 
+            <div class="form-group">
+                <label asp-for="Diagnosis" class="control-label"></label>
+                <input asp-for="Diagnosis" class="form-control" />
+                <span asp-validation-for="Diagnosis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Symptoms" class="control-label"></label>
+                <input asp-for="Symptoms" class="form-control" />
+                <span asp-validation-for="Symptoms" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TreatmentPlan" class="control-label"></label>
+                <input asp-for="TreatmentPlan" class="form-control" />
+                <span asp-validation-for="TreatmentPlan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppointmentId" class="control-label"></label>
+                <input asp-for="AppointmentId" class="form-control" />
+                <span asp-validation-for="AppointmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<div>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+</div>
+
+<div class="form-group">
+    <input type="submit" value="Submit Diagnosis" class="btn btn-outline-info" />
+
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

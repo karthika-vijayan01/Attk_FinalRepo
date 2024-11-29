@@ -2,7 +2,7 @@
 
 namespace Attk_Final.Controllers
 {
-    public class ReceptionistController : Controller
+    public class DocController : Controller
     {
         public IActionResult Index()
         {

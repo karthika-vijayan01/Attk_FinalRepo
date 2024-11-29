@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Attk_Final.Models.AppointmentViewModel>
+
+@{
+    ViewData["Title"] = "GetAppointmentsByDoctorId";
+}
+
+<h1>GetAppointmentsByDoctorId</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TokenNumber)
+            </th>
+           @*  <th>
+                @Html.DisplayNameFor(model => model.AppointmentId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PatientId)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppointmentDate)
+            </th>
+           
+           @*  <th>
+                @Html.DisplayNameFor(model => model.DoctorId)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BloodGroup)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TokenNumber)
+                </td>
+            @* <td>
+                @Html.DisplayFor(modelItem => item.AppointmentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientId)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.PatientName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppointmentDate)
+            </td>
+           
+           @*  <td>
+                @Html.DisplayFor(modelItem => item.DoctorId)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodGroup)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+               @*  @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }) *@
+                    <a asp-controller="ViewDiagnosys" asp-action="StartDiagnosis" class="btn btn-primary btn-lg">
+                        Start Diagnosys
+                    </a>
+                    <a asp-controller="ViewDiagnosys" asp-action="ViewDiagnosys" class="btn btn-primary btn-lg">
+                        View Diagnosys
+                    </a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
